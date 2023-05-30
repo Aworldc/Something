@@ -1,2 +1,2 @@
 # Something
-Almost a JavaScript framework
+Just some random JS library...
