@@ -294,6 +294,11 @@ class elementBuilder {
         return this
     }
 
+    clear() {
+        this._domEl.innerHTML = ''
+        return this
+    }
+
     hasClass(name) {
         return this._domEl.classList.contains(name)
     }
