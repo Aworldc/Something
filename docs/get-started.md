@@ -47,4 +47,4 @@ The above is just an example, obviously. if you couldn't guess what the code abo
 
 ## Read the documentation
 Go on. Read it.<br>
-Wait, you wanted a link? Oh ok. [Here](api/api.md).
+Wait, you wanted a link? Oh ok. [Here](api/index.md).
