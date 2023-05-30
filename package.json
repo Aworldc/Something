@@ -1,0 +1,10 @@
+{
+    "name": "something.js",
+    "license": "MIT",
+    "version": "1.0.1",
+    "module": "main.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Aworldc/Something.git"
+    }
+}
