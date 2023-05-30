@@ -1,5 +1,5 @@
 {
-    "name": "something.js",
+    "name": "@aworldc/something",
     "license": "MIT",
     "version": "1.0.1",
     "module": "main.js",
