@@ -1,7 +1,3 @@
-// Vpp.js
-// Almost a JavaScript framework
-// Made by Aworldc
-
 let _globalData = {}
 
 class reactiveVariable {
