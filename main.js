@@ -412,6 +412,12 @@ function $css(css) {
     document.head.appendChild(document.createElement('style')).innerHTML = css
 }
 
+function $tag(handler) {
+    return (strings, ...values) => {
+        return handler(String.raw(strings, ...values))
+    }
+}
+
 function _(type) {
     return new elementBuilder(type)
 }
@@ -449,6 +455,7 @@ export {
     $all,
     $net,
     $css,
+    $tag,
     _,
     _var,
     _num,
