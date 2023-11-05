@@ -1,6 +1,7 @@
 # Get started with something
 
 ## Install
+> IMPORTANT: While you normally should install it from npm, DON'T DO THAT at the moment because I accidentally published a copy of node.js instead of this library. (See [#1](https://github.com/Aworldc/Something/issues/1))
 ```bash
 # requires node.js
 $ npm install @aworldc/something
