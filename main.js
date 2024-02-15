@@ -299,6 +299,18 @@ class elementBuilder {
         return this
     }
 
+    loop(list, itemcallback, blankcallback) {
+        if (list.length == 0) {
+            this.insert(blankcallback())
+        } else {
+            list.forEach(item => {
+                this.insert(itemcallback(item))
+            })
+        }
+
+        return this
+    }
+
     hasClass(name) {
         return this._domEl.classList.contains(name)
     }
