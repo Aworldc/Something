@@ -333,75 +333,6 @@ class elementBuilder {
     }
 }
 
-class net {
-    constructor() {}
-
-    request(url, method = 'GET', body = {}, callback) {
-        if ((method = 'GET')) {
-            fetch(url)
-                .then((res) => {
-                    let obj = {
-                        error: false,
-                        response: res,
-                        ok: res.ok,
-                        status: res.status,
-                    }
-                    callback(obj)
-                })
-                .catch((reason) => {
-                    let obj = {
-                        error: true,
-                        reason,
-                    }
-                    callback(obj)
-                })
-        } else {
-            fetch(url, {
-                method,
-                body,
-            })
-                .then((res) => {
-                    let obj = {
-                        error: false,
-                        response: res,
-                        ok: res.ok,
-                        status: res.status,
-                    }
-                    callback(obj)
-                })
-                .catch((reason) => {
-                    let obj = {
-                        error: true,
-                        reason,
-                    }
-                    callback(obj)
-                })
-        }
-    }
-
-    response(res, format, callback) {
-        if (format == 'text') {
-            res.text().then((data) => {
-                callback(data)
-            })
-        } else if (format == 'stream') {
-            callback(res.body)
-        } else if (format == 'json') {
-            res.json().then((data) => {
-                callback(data)
-            })
-        } else if (format == 'blob') {
-            res.blob().then((data) => {
-                callback(data)
-            })
-        } else if (format == 'form') {
-            res.formData().then((data) => {
-                callback(data)
-            })
-        }
-    }
-}
-
 function $(selector) {
     return new elementBuilder().fromDom(document.querySelector(selector))
 }
@@ -414,10 +345,6 @@ function $all(selector) {
     })
 
     return els
-}
-
-function $net() {
-    return new net()
 }
 
 function $css(css) {
@@ -462,10 +389,32 @@ function grab(key) {
     return _globalData[key]
 }
 
+function randomItem(array) {
+    return array[Math.floor(Math.random() * array.length)]
+}
+
+function randomBetween(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+function randomString(length) {
+    let result = ''
+    const characters =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    const charactersLength = characters.length
+    let counter = 0
+    while (counter < length) {
+        result += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+        )
+        counter += 1
+    }
+    return result
+}
+
 export {
     $,
     $all,
-    $net,
     $css,
     $tag,
     _,
@@ -476,4 +425,7 @@ export {
     _object,
     stash,
     grab,
+    randomItem,
+    randomBetween,
+    randomString
 }
