@@ -2,8 +2,8 @@
 
 ## Install
 ```bash
-# requires node.js
-$ npm install @aworldc/something
+# requires node.js and pnpm. if you don't use pnpm replace pnpm with npm
+$ pnpm install @aworldc/something
 ```
 
 ## Get some boilerplate running
