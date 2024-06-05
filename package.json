@@ -2,8 +2,13 @@
     "name": "@aworldc/something",
     "license": "MIT",
     "version": "1.0.1",
-    "main": "src/main.js",
-    "module": "src/main.js",
+    "main": "build/node.js",
+    "type": "module",
+    "browser": "build/browser.js",
+    "files": [
+        "src/**/*",
+        "build/**/*"
+    ],
     "scripts": {
         "build": "esbuild --bundle --minify --platform=node src/neutral.js src/node.js src/browser.js --format=esm --outdir=build"
     },
