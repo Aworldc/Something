@@ -2,9 +2,16 @@
     "name": "@aworldc/something",
     "license": "MIT",
     "version": "1.0.1",
-    "module": "main.js",
+    "main": "src/main.js",
+    "module": "src/main.js",
+    "scripts": {
+        "build": "esbuild --bundle --minify --platform=node src/neutral.js src/node.js src/browser.js --format=esm --outdir=build"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/Aworldc/Something.git"
+    },
+    "devDependencies": {
+        "esbuild": "^0.21.4"
     }
 }
