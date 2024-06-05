@@ -1,7 +1,7 @@
 {
     "name": "@aworldc/something",
     "license": "MIT",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "main": "build/node.js",
     "type": "module",
     "browser": "build/browser.js",
