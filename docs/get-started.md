@@ -1,12 +1,10 @@
 # Get started with something
 
 ## Install
-> IMPORTANT: While you normally should install it from npm, DON'T DO THAT at the moment because I accidentally published a copy of node.js instead of this library. (See [#1](https://github.com/Aworldc/Something/issues/1))
 ```bash
 # requires node.js
 $ npm install @aworldc/something
 ```
-or <kbd><a href="https://raw.githubusercontent.com/Aworldc/Something/main/main.js">Download something -&gt;</a></kbd>
 
 ## Get some boilerplate running
 I'm sure everyone knows this by now. But here it is anyway.
@@ -34,12 +32,6 @@ If you don't know what on earth a bundler is, you should probably go check out [
 
 ## Import and use something
 ```javascript
-// if installed via npm
-// import { $, _ } from '@aworldc/something'
-//
-// if directly downloaded, replacing <filename> with whatever you saved something with
-// import { $, _ } from './<filename>'
-
 import { $, _ } from '@aworldc/something'
 
 $('.app').insert(_('h1').text('Hello, world!'))
