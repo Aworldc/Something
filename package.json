@@ -18,5 +18,10 @@
     },
     "devDependencies": {
         "esbuild": "^0.21.4"
+    },
+    "dependencies": {
+        "yaml": "^2.4.3",
+        "smol-toml": "^1.2.1",
+        "xml-js": "^1.6.11"
     }
 }
