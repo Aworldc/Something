@@ -1,27 +1,28 @@
 {
     "name": "@aworldc/something",
     "license": "MIT",
-    "version": "1.1.0",
-    "main": "build/node.js",
+    "version": "1.2.0",
+    "main": "build.js",
     "type": "module",
-    "browser": "build/browser.js",
     "files": [
         "src/**/*",
-        "build/**/*"
+        "build.js"
     ],
     "scripts": {
-        "build": "esbuild --bundle --minify --platform=node src/neutral.js src/node.js src/browser.js --format=esm --outdir=build"
+        "build": "esbuild --bundle --minify --format=esm --outfile=build.js src/main.js & jsdoc2md -f src/lib/* --separators > docs/api.md"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/Aworldc/Something.git"
     },
     "devDependencies": {
-        "esbuild": "^0.21.4"
+        "esbuild": "^0.21.4",
+        "jsdoc-to-markdown": "*"
     },
     "dependencies": {
-        "yaml": "^2.4.3",
+        "bezier": "^0.1.0",
         "smol-toml": "^1.2.1",
-        "xml-js": "^1.6.11"
+        "xml-js": "^1.6.11",
+        "yaml": "^2.4.3"
     }
 }

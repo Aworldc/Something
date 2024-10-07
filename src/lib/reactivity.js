@@ -1,13 +1,24 @@
+/**
+ * An object containing a variable that can be subscribed to.
+ */
 class reactiveVariable {
     constructor(initialValue = '') {
         this._value = initialValue
         this._subscribers = []
     }
 
+    /**
+     * Get the value of this variable.
+     * @returns The value of this variable.
+     */
     get() {
         return this._value
     }
 
+    /**
+     * Set the value of this variable.
+     * @param {*} newValue The new value.
+     */
     set(newValue) {
         let oldValue = this._value
         this._value = newValue
@@ -17,10 +28,17 @@ class reactiveVariable {
         })
     }
 
+    /**
+     * Subscribe to the value of this variable.
+     * @param {*} notificationHandler
+     */
     subscribe(notificationHandler) {
         this._subscribers.push(notificationHandler)
     }
 
+    /**
+     * Trigger all notification handlers.
+     */
     notify() {
         this._subscribers.forEach(subscriber => {
             subscriber(this._value, this._value)
@@ -28,6 +46,9 @@ class reactiveVariable {
     }
 }
 
+/**
+ * An object containing a number that can be subscribed to.
+ */
 class reactiveNumber {
     constructor(initialValue = 0) {
         this._value = initialValue
@@ -78,6 +99,9 @@ class reactiveNumber {
     }
 }
 
+/**
+ * An object containing a list that can be subscribed to.
+ */
 class reactiveList {
     constructor(initialValue = []) {
         this._value = initialValue
@@ -118,6 +142,9 @@ class reactiveList {
     }
 }
 
+/**
+ * An object containing a queue that can be subscribed to.
+ */
 class reactiveQueue {
     constructor(initialValue = []) {
         this._value = initialValue
@@ -171,6 +198,9 @@ class reactiveQueue {
     }
 }
 
+/**
+ * An object containing an object that can be subscribed to.
+ */
 class reactiveObject {
     constructor(initialValue = {}) {
         this._value = initialValue

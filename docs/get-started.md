@@ -1,15 +1,20 @@
 # Get started with something
 
 ## Install
+
 ```bash
 # requires node.js and pnpm. if you don't use pnpm replace pnpm with npm
 $ pnpm install @aworldc/something
 ```
 
 ## Get some boilerplate running
+
 I'm sure everyone knows this by now. But here it is anyway.
+
 ### Create an index.html file
+
 Follow the damn title. Here's some boilerplate:
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -25,19 +30,28 @@ Follow the damn title. Here's some boilerplate:
     </body>
 </html>
 ```
+
 ### Create a javascript file
-Again. Follow the title. Call it what you want, I don't care.<br>
-Make sure to load it in to the html file ***in*** the body, but ***after*** all content. If you are not using a bundler, which is a very bad idea in production, make sure to add `type="module"` to your script tag, as something is esm-only.<br>
-If you don't know what on earth a bundler is, you should probably go check out [esbuild](https://esbuild.github.io/).
+
+Again. Follow the title. Call it what you want, I don't care.<br> Make sure to
+load it in to the html file **_in_** the body, but **_after_** all content. If
+you are not using a bundler, which is a very bad idea in production, make sure
+to add `type="module"` to your script tag, as something is esm-only.<br> If you
+don't know what on earth a bundler is, you should probably go check out
+[esbuild](https://esbuild.github.io/).
 
 ## Import and use something
+
 ```javascript
 import { $, _ } from '@aworldc/something'
 
 $('.app').insert(_('h1').text('Hello, world!'))
 ```
-The above is just an example, obviously. if you couldn't guess what the code above does, it inserts `<h1>Hello, world!</h1>` into the element with a class of `app`.
+
+The above is just an example, obviously. if you couldn't guess what the code
+above does, it inserts `<h1>Hello, world!</h1>` into the element with a class of
+`app`.
 
 ## Read the documentation
-Go on. Read it.<br>
-Wait, you wanted a link? Oh ok. [Here](api/index.md).
+
+Go on. Read it.<br> Wait, you wanted a link? Oh ok. [Here](api.md).
