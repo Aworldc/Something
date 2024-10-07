@@ -7,11 +7,26 @@
 <dt><a href="#reactiveVariable">reactiveVariable</a></dt>
 <dd><p>An object containing a variable that can be subscribed to.</p>
 </dd>
+<dt><a href="#reactiveNumber">reactiveNumber</a></dt>
+<dd><p>An object containing a number that can be subscribed to.</p>
+</dd>
+<dt><a href="#reactiveList">reactiveList</a></dt>
+<dd><p>An object containing a list that can be subscribed to.</p>
+</dd>
+<dt><a href="#reactiveQueue">reactiveQueue</a></dt>
+<dd><p>An object containing a queue that can be subscribed to.</p>
+</dd>
+<dt><a href="#reactiveObject">reactiveObject</a></dt>
+<dd><p>An object containing an object that can be subscribed to.</p>
+</dd>
 </dl>
 
 ## Functions
 
 <dl>
+<dt><a href="#_bezier">_bezier(points)</a> ⇒ <code><a href="#BezierCurveObject">BezierCurveObject</a></code></dt>
+<dd><p>Produce a bezier curve</p>
+</dd>
 <dt><a href="#$">$(selector)</a> ⇒ <code><a href="#elementBuilder">elementBuilder</a></code></dt>
 <dd><p>Selects an element as an <a href="#elementBuilder">elementBuilder</a>.</p>
 </dd>
@@ -42,16 +57,16 @@
 <dd><p>Creates a <a href="#reactiveVariable">reactiveVariable</a> object.</p>
 </dd>
 <dt><a href="#_num">_num(initialValue)</a> ⇒</dt>
-<dd><p>Creates a <a href="reactiveNumber">reactiveNumber</a> object.</p>
+<dd><p>Creates a <a href="#reactiveNumber">reactiveNumber</a> object.</p>
 </dd>
 <dt><a href="#_list">_list(initialValue)</a> ⇒</dt>
-<dd><p>Creates a <a href="reactiveList">reactiveList</a> object.</p>
+<dd><p>Creates a <a href="#reactiveList">reactiveList</a> object.</p>
 </dd>
 <dt><a href="#_queue">_queue(initialValue)</a> ⇒</dt>
-<dd><p>Creates a <a href="reactiveQueue">reactiveQueue</a> object.</p>
+<dd><p>Creates a <a href="#reactiveQueue">reactiveQueue</a> object.</p>
 </dd>
 <dt><a href="#_object">_object(initialValue)</a> ⇒</dt>
-<dd><p>Creates a <a href="reactiveObject">reactiveObject</a> object.</p>
+<dd><p>Creates a <a href="#reactiveObject">reactiveObject</a> object.</p>
 </dd>
 <dt><a href="#neutral_impurities">neutral_impurities()</a></dt>
 <dd><p>Adds some extra utilities to other types,
@@ -59,6 +74,14 @@ including Math.randomString, which is an alias for <a href="#randomString">rando
 Math.randomBetween, Which is an alias for <a href="#randomBetween">randomBetween</a>,
 and Array.prototype.random,
 which returns a random item of the array it&#39;s called on.</p>
+</dd>
+</dl>
+
+## Typedefs
+
+<dl>
+<dt><a href="#BezierCurveObject">BezierCurveObject</a> : <code>Object</code></dt>
+<dd><p>A bezier curve</p>
 </dd>
 </dl>
 
@@ -407,6 +430,7 @@ An object containing a variable that can be subscribed to.
     * [.get()](#reactiveVariable+get) ⇒
     * [.set(newValue)](#reactiveVariable+set)
     * [.subscribe(notificationHandler)](#reactiveVariable+subscribe)
+    * [.notify()](#reactiveVariable+notify)
 
 
 * * *
@@ -445,6 +469,66 @@ Subscribe to the value of this variable.
 | Param | Type |
 | --- | --- |
 | notificationHandler | <code>\*</code> | 
+
+
+* * *
+
+<a name="reactiveVariable+notify"></a>
+
+### reactiveVariable.notify()
+Trigger all notification handlers.
+
+**Kind**: instance method of [<code>reactiveVariable</code>](#reactiveVariable)  
+
+* * *
+
+<a name="reactiveNumber"></a>
+
+## reactiveNumber
+An object containing a number that can be subscribed to.
+
+**Kind**: global class  
+
+* * *
+
+<a name="reactiveList"></a>
+
+## reactiveList
+An object containing a list that can be subscribed to.
+
+**Kind**: global class  
+
+* * *
+
+<a name="reactiveQueue"></a>
+
+## reactiveQueue
+An object containing a queue that can be subscribed to.
+
+**Kind**: global class  
+
+* * *
+
+<a name="reactiveObject"></a>
+
+## reactiveObject
+An object containing an object that can be subscribed to.
+
+**Kind**: global class  
+
+* * *
+
+<a name="_bezier"></a>
+
+## \_bezier(points) ⇒ [<code>BezierCurveObject</code>](#BezierCurveObject)
+Produce a bezier curve
+
+**Kind**: global function  
+**Returns**: [<code>BezierCurveObject</code>](#BezierCurveObject) - The bezier curve produced.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| points | <code>Array.&lt;Array.&lt;number&gt;&gt;</code> | An array of points, where each point is        an array of numbers where each number represents one dimention. |
 
 
 * * *
@@ -595,10 +679,10 @@ Creates a [reactiveVariable](#reactiveVariable) object.
 <a name="_num"></a>
 
 ## \_num(initialValue) ⇒
-Creates a [reactiveNumber](reactiveNumber) object.
+Creates a [reactiveNumber](#reactiveNumber) object.
 
 **Kind**: global function  
-**Returns**: A [reactiveNumber](reactiveNumber) object.  
+**Returns**: A [reactiveNumber](#reactiveNumber) object.  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -610,10 +694,10 @@ Creates a [reactiveNumber](reactiveNumber) object.
 <a name="_list"></a>
 
 ## \_list(initialValue) ⇒
-Creates a [reactiveList](reactiveList) object.
+Creates a [reactiveList](#reactiveList) object.
 
 **Kind**: global function  
-**Returns**: A [reactiveList](reactiveList) object.  
+**Returns**: A [reactiveList](#reactiveList) object.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -625,10 +709,10 @@ Creates a [reactiveList](reactiveList) object.
 <a name="_queue"></a>
 
 ## \_queue(initialValue) ⇒
-Creates a [reactiveQueue](reactiveQueue) object.
+Creates a [reactiveQueue](#reactiveQueue) object.
 
 **Kind**: global function  
-**Returns**: A [reactiveQueue](reactiveQueue) object.  
+**Returns**: A [reactiveQueue](#reactiveQueue) object.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -640,10 +724,10 @@ Creates a [reactiveQueue](reactiveQueue) object.
 <a name="_object"></a>
 
 ## \_object(initialValue) ⇒
-Creates a [reactiveObject](reactiveObject) object.
+Creates a [reactiveObject](#reactiveObject) object.
 
 **Kind**: global function  
-**Returns**: A [reactiveObject](reactiveObject) object.  
+**Returns**: A [reactiveObject](#reactiveObject) object.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -658,6 +742,22 @@ Creates a [reactiveObject](reactiveObject) object.
 Adds some extra utilities to other types,including Math.randomString, which is an alias for [randomString](#randomString),Math.randomBetween, Which is an alias for [randomBetween](#randomBetween),and Array.prototype.random,which returns a random item of the array it's called on.
 
 **Kind**: global function  
+
+* * *
+
+<a name="BezierCurveObject"></a>
+
+## BezierCurveObject : <code>Object</code>
+A bezier curve
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| get_point | <code>function</code> | Gets a point on the curve,           where n is the positon along the curve from 0 to 1. |
+| bake_points | <code>function</code> | Get n number of           evenly spaced points on the curve. |
+
 
 * * *
 
