@@ -1,5 +1,5 @@
 <div align="center">
-  Coming soon: The documentation update!<br>
+  Coming soon: Documentation!<br>
   After that: Reactive primitives v2!<br><br>
   <img src="drawing.png" width="600" />
   <br><br>
