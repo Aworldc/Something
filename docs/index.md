@@ -1,5 +1,11 @@
-# Something
+<div align="center">
+  Coming soon: Documentation!<br>
+  <kbd><a href="/coming-soon.md">See all upcoming updates -&gt;</a></kbd><br><br>
+  <img src="../drawing.png" width="600" />
+  <br><br>
+  
+  A lightweight, esm-first reactive frontend library inspired by jquery, solid, and the vanilla DOM Api.
 
-**A new JS library for user interfaces, inspired by jQuery, SolidJS, and the DOM Api**
-<br><kbd><a href="/docs/get-started.md">Get started -&gt;</a></kbd>
-<br><kbd><a href="/docs/api/index.md">Read the docs -&gt;</a></kbd>
+  <kbd><a href="/get-started.md">Get started -&gt;</a></kbd>
+  <kbd><a href="/api.md">Read the docs -&gt;</a></kbd>
+</div>
