@@ -1,5 +1,7 @@
 # Get started with something
 
+ <kbd><a href="/docs/index.md">Home</a></kbd> / <kbd>Get Started</kbd><br><br>
+
 ## Install
 
 ```bash
