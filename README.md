@@ -7,5 +7,5 @@
   A lightweight, esm-first reactive frontend library inspired by jquery, solid, and the vanilla DOM Api.
 
   <kbd><a href="/docs/get-started.md">Get started -&gt;</a></kbd>
-  <kbd><a href="/docs/api/index.md">Read the docs -&gt;</a></kbd>
+  <kbd><a href="/docs/api.md">Read the docs -&gt;</a></kbd>
 </div>
