@@ -1,3 +1,7 @@
+# Something documentation
+
+<kbd><a href="/docs/index.md">Home</a></kbd> / <kbd>Api Documetation</kbd><br><br>
+
 ## Classes
 
 <dl>
@@ -739,7 +743,11 @@ Creates a [reactiveObject](#reactiveObject) object.
 <a name="neutral_impurities"></a>
 
 ## neutral\_impurities()
-Adds some extra utilities to other types,including Math.randomString, which is an alias for [randomString](#randomString),Math.randomBetween, Which is an alias for [randomBetween](#randomBetween),and Array.prototype.random,which returns a random item of the array it's called on.
+Adds some extra utilities to other types,
+including Math.randomString, which is an alias for [randomString](#randomString),
+Math.randomBetween, Which is an alias for [randomBetween](#randomBetween),
+and Array.prototype.random,
+which returns a random item of the array it's called on.
 
 **Kind**: global function  
 
