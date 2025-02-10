@@ -27,6 +27,7 @@ function $all(selector) {
 /**
  * Injects css into the current webpage.
  * @param {string} css The css to be injected.
+ * @deprecated
  */
 function $css(css) {
     document.head.appendChild(document.createElement('style')).innerHTML = css
