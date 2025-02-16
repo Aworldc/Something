@@ -1,22 +1,20 @@
 {
     "name": "@aworldc/something",
     "license": "MIT",
-    "version": "1.2.0",
-    "main": "build.js",
+    "version": "2.0.0-prealpha",
+    "main": "src/main.js",
     "type": "module",
     "files": [
-        "src/**/*",
-        "build.js"
+        "src/**/*"
     ],
     "scripts": {
-        "build": "esbuild --bundle --minify --format=esm --outfile=build.js src/main.js & jsdoc2md -f src/lib/* --separators > docs/api.md"
+        "build": "jsdoc2md -f src/lib/* --separators > docs/api.md"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/Aworldc/Something.git"
     },
     "devDependencies": {
-        "esbuild": "^0.21.4",
         "jsdoc-to-markdown": "*"
     },
     "dependencies": {

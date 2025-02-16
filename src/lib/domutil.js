@@ -1,24 +1,24 @@
-import { elementBuilder } from './element.js'
+import { ElementBuilder } from './element.js'
 
 /**
- * Selects an element as an {@link elementBuilder}.
+ * Selects an element as an {@link ElementBuilder}.
  * @param {string} selector The css selector for an element.
- * @returns {elementBuilder} An elementBuilder attached to the dom element associated with the provided selector.
+ * @returns {ElementBuilder} An elementBuilder attached to the dom element associated with the provided selector.
  */
 function $(selector) {
-    return new elementBuilder().fromDom(document.querySelector(selector))
+    return new ElementBuilder().fromDom(document.querySelector(selector))
 }
 
 /**
  *
  * @param {string} selector The css selector for a collection of elements.
- * @returns {Array<elementBuilder>} An array containing whose are attached to the DOM elements associated with the provided selector.
+ * @returns {Array<ElementBuilder>} An array containing whose are attached to the DOM elements associated with the provided selector.
  */
 function $all(selector) {
     let els = []
 
     document.querySelectorAll(selector).forEach(el => {
-        els.push(new elementBuilder().fromDom(el))
+        els.push(new ElementBuilder().fromDom(el))
     })
 
     return els
@@ -37,10 +37,10 @@ function $css(css) {
  * Creates a new dom element.
  * @param {string} type The type of element to create.
  * @default type A div.
- * @returns {elementBuilder} An elementBuilder attached to a brand-new dom element of the specified type.
+ * @returns {ElementBuilder} An elementBuilder attached to a brand-new dom element of the specified type.
  */
 function _(type) {
-    return new elementBuilder(type)
+    return new ElementBuilder(type)
 }
 
 export { $, $all, $css, _ }

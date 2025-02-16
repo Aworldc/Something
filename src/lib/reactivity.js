@@ -1,4 +1,4 @@
-class Reactive {
+export class Reactive {
     #value
     #listeners
 
@@ -27,10 +27,3 @@ class Reactive {
         this.value = new_value
     }
 }
-
-export let Variable = initial_value => new Reactive(initial_value)
-
-export let subscribe = (maybe_reactive, handler) =>
-    maybe_reactive instanceof Reactive
-        ? maybe_reactive.subscribe(handler)
-        : handler(maybe_reactive, maybe_reactive)

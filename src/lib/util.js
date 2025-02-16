@@ -37,6 +37,13 @@ export function get_random_string(length) {
     return result
 }
 
+export let Var = initial_value => new Reactive(initial_value)
+
+export let subscribe = (maybe_reactive, handler) =>
+    maybe_reactive instanceof Reactive
+        ? maybe_reactive.subscribe(handler)
+        : handler(maybe_reactive, maybe_reactive)
+
 /**
  * Generates a tag for use with tagged templates from a function.
  * @param {function} handler A function that takes a string and returns something else.
