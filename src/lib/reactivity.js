@@ -1,14 +1,22 @@
+import { noop } from './util.js'
+
 export class Reactive {
     #value
     #listeners
+    #formatter
 
-    constructor(default_value) {
+    constructor(default_value, formatter = noop) {
         this.#value = default_value
         this.#listeners = []
+        this.#formatter = formatter
     }
 
     get value() {
-        return this.#value
+        if (this.#formatter != noop) {
+            return this.#formatter(this.#value)
+        } else {
+            return this.#value
+        }
     }
 
     set value(new_value) {
@@ -25,5 +33,13 @@ export class Reactive {
     update(updater) {
         let new_value = updater(this.value)
         this.value = new_value
+    }
+
+    as(formatter) {
+        let new_thing = new Reactive(this.value, formatter)
+
+        this.subscribe(new_value => (new_thing.value = new_value))
+
+        return new_thing
     }
 }

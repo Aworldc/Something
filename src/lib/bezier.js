@@ -15,15 +15,11 @@ import { prepare } from 'bezier'
  *        an array of numbers where each number represents one dimension.
  * @returns {BezierCurveObject} The bezier curve produced.
  */
-export function _bezier(points) {
-    console.log(points)
-
+export let Bezier = points => {
     let bezier_function = prepare(points.length)
     let rearranged_points = Array(points[0].length)
         .fill([])
         .map((v, i) => points.map(x => x[i]))
-
-    console.log(rearranged_points)
 
     let fn = x => {
         return rearranged_points.map(y => bezier_function(y, x))

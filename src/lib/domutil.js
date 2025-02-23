@@ -6,7 +6,7 @@ import { ElementBuilder } from './element.js'
  * @returns {ElementBuilder} An elementBuilder attached to the dom element associated with the provided selector.
  */
 function $(selector) {
-    return new ElementBuilder().fromDom(document.querySelector(selector))
+    return new ElementBuilder().from_dom(document.querySelector(selector))
 }
 
 /**
@@ -18,7 +18,7 @@ function $all(selector) {
     let els = []
 
     document.querySelectorAll(selector).forEach(el => {
-        els.push(new ElementBuilder().fromDom(el))
+        els.push(new ElementBuilder().from_dom(el))
     })
 
     return els

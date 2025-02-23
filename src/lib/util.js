@@ -1,3 +1,5 @@
+import { Reactive } from './reactivity.js'
+
 /**
  * Gets a random item from an Array.
  * @param {Array} array The array to get random items from.
@@ -37,12 +39,17 @@ export function get_random_string(length) {
     return result
 }
 
-export let Var = initial_value => new Reactive(initial_value)
+export let Variable = initial_value =>
+    initial_value instanceof Reactive
+        ? initial_value
+        : new Reactive(initial_value)
 
 export let subscribe = (maybe_reactive, handler) =>
     maybe_reactive instanceof Reactive
         ? maybe_reactive.subscribe(handler)
         : handler(maybe_reactive, maybe_reactive)
+
+export let noop = () => {}
 
 /**
  * Generates a tag for use with tagged templates from a function.

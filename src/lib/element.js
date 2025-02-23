@@ -33,7 +33,7 @@ export class ElementBuilder {
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
     insert(element) {
-        this._domEl.appendChild(element.toDom())
+        this._domEl.appendChild(element.to_dom())
         return this
     }
 
@@ -70,6 +70,22 @@ export class ElementBuilder {
     style(property, value) {
         subscribe(value, value => {
             this._domEl.style[property] = value
+        })
+
+        return this
+    }
+
+    set_cssvar(property, value) {
+        subscribe(value, value => {
+            this._domEl.style.setProperty(`--${property}`, value)
+        })
+
+        return this
+    }
+
+    get_cssvar(property) {
+        subscribe(value, value => {
+            this._domEl.style.getPropertyValue(`--${property}`)
         })
 
         return this
@@ -126,15 +142,16 @@ export class ElementBuilder {
      * @param {string | Reactive} name The classname to add.
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
-    addClass(name) {
+    add_class(name) {
         let temp
 
         subscribe(name, value => {
             if (temp) {
-                this.removeClass(temp)
+                this.remove_class(temp)
             }
 
-            this._domEl.classList.add(name)
+            this._domEl.classList.add(value)
+            temp = value
         })
 
         return this
@@ -145,7 +162,7 @@ export class ElementBuilder {
      * @param {string} name The name of the class to remove.
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
-    removeClass(name) {
+    remove_class(name) {
         this._domEl.classList.remove(name)
         return this
     }
@@ -156,7 +173,7 @@ export class ElementBuilder {
      * @param {string} newClass The class to replace with.
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
-    replaceClass(oldClass, newClass) {
+    replace_class(oldClass, newClass) {
         this._domEl.classList.replace(oldClass, newClass)
         return this
     }
@@ -166,7 +183,7 @@ export class ElementBuilder {
      * @param {string} name The class to be toggled
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
-    toggleClass(name) {
+    toggle_class(name) {
         this._domEl.classList.toggle(name)
         return this
     }
@@ -178,7 +195,7 @@ export class ElementBuilder {
      * @param {*} nocb Code to run if the class is not present.
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
-    ifClass(name, yescb, nocb) {
+    if_class(name, yescb, nocb) {
         if (this._domEl.classList.contains(name)) {
             yescb()
         } else {
@@ -220,7 +237,7 @@ export class ElementBuilder {
      * @param {string} name The class to check for the presence of.
      * @returns {boolean} Whether this element has that class
      */
-    hasClass(name) {
+    has_class(name) {
         return this._domEl.classList.contains(name)
     }
 
@@ -245,7 +262,7 @@ export class ElementBuilder {
      * @param {*} element The DOM element to attach to.
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
-    fromDom(element) {
+    from_dom(element) {
         this._domEl = element
         return this
     }
@@ -254,7 +271,21 @@ export class ElementBuilder {
      * Gets the underlying DOM element of this elementBuilder.
      * @returns The underlying DOM element of this elementBuilder.
      */
-    toDom() {
+    to_dom() {
         return this._domEl
+    }
+
+    if(condition, handler) {
+        if (condition) {
+            handler(this.get())
+        }
+
+        return this
+    }
+
+    process(handler) {
+        handler(this)
+
+        return this
     }
 }
