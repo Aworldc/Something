@@ -37,9 +37,12 @@ Follow the damn title. Here's some copy-paste if you want it:
 
 Again. Follow the title. Call it whatever you want, I don't care.<br> Make sure
 to load it in to the html file **_in_** the body, but **_after_** all content.
+
 If you are not using a bundler, which is a very bad idea in production, make
 sure to add `type="module"` to your script tag, as something is built on es
-modules. If you don't know what on earth a bundler is, you should probably go
+modules. 
+
+If you don't know what on earth a bundler is, you should probably go
 check out [esbuild](https://esbuild.github.io/).
 
 ## Import and use something
@@ -59,4 +62,4 @@ class of `app`.
 Yes, I know. You have to read the ~~freaking~~ friendly manual.<br>Wait, you
 wanted a link? Oh ok. [Here](api.md).
 
-Or continue with another tutorial, [over the page](/docs/using-reactivity.md).
+Or continue with the tutorial, [over the page](/docs/using-reactivity.md).
