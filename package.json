@@ -19,8 +19,5 @@
     },
     "dependencies": {
         "bezier": "^0.1.0",
-        "smol-toml": "^1.2.1",
-        "xml-js": "^1.6.11",
-        "yaml": "^2.4.3"
     }
 }

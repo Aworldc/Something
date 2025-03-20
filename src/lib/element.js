@@ -1,4 +1,4 @@
-import { subscribe } from './util.js'
+import { get_random_string, is_reactive, subscribe, Variable } from './util.js'
 import { Reactive } from './reactivity.js'
 
 /**
@@ -29,11 +29,22 @@ export class ElementBuilder {
 
     /**
      * Inserts another elementBuilder as a child of this element.
-     * @param {ElementBuilder} element The elementBuilder to insert.
+     * @param {ElementBuilder| Reactive} element The elementBuilder to insert.
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
     insert(element) {
-        this._domEl.appendChild(element.to_dom())
+        if (is_reactive(element)) {
+            let the_element = element.value.to_dom()
+
+            this._domEl.appendChild(the_element)
+
+            element.subscribe(element => {
+                the_element.replaceWith(element.to_dom())
+            })
+        } else {
+            this._domEl.appendChild(element.to_dom())
+        }
+
         return this
     }
 
@@ -84,11 +95,7 @@ export class ElementBuilder {
     }
 
     get_cssvar(property) {
-        subscribe(value, value => {
-            this._domEl.style.getPropertyValue(`--${property}`)
-        })
-
-        return this
+        this._domEl.style.getPropertyValue(`--${property}`)
     }
 
     /**
@@ -112,6 +119,18 @@ export class ElementBuilder {
      */
     get_prop(property) {
         return this._domEl.getAttribute(property)
+    }
+
+    bind_prop(property, variable, event) {
+        subscribe(variable, variable => {
+            this._domEl.setAttribute(property, variable)
+        })
+
+        this._domEl.addEventListener(event, () => {
+            variable = this._domEl.getAttribute(property)
+        })
+
+        return this
     }
 
     /**
@@ -224,8 +243,8 @@ export class ElementBuilder {
         if (list.length == 0) {
             this.insert(blankcallback())
         } else {
-            list.forEach(item => {
-                this.insert(itemcallback(item))
+            list.forEach((item, index) => {
+                this.insert(itemcallback(item, index))
             })
         }
 

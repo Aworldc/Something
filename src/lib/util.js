@@ -49,6 +49,8 @@ export let subscribe = (maybe_reactive, handler) =>
         ? maybe_reactive.subscribe(handler)
         : handler(maybe_reactive, maybe_reactive)
 
+export let is_reactive = maybe_reactive => maybe_reactive instanceof Reactive
+
 export let noop = () => {}
 
 /**
