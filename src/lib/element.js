@@ -95,7 +95,7 @@ export class ElementBuilder {
     }
 
     get_cssvar(property) {
-        this._domEl.style.getPropertyValue(`--${property}`)
+        return this._domEl.style.getPropertyValue(`--${property}`)
     }
 
     /**
@@ -152,7 +152,7 @@ export class ElementBuilder {
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
     id(id) {
-        this._domEl.setAttribute(id, identifier)
+        this._domEl.setAttribute('id', id)
         return this
     }
 
@@ -262,10 +262,10 @@ export class ElementBuilder {
 
     /**
      * Gets the list of all classes on this element.
-     * @returns {DOMTokenList} All the classes on this element.
+     * @returns {Array} All the classes on this element.
      */
     classes() {
-        return this._domEl.classList
+        return Array.from(this._domEl.classList)
     }
 
     /**

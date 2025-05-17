@@ -1,23 +1,28 @@
 {
     "name": "@aworldc/something",
     "license": "MIT",
-    "version": "2.0.0-prealpha",
+    "version": "2.0.0-alpha1",
     "main": "src/main.js",
     "type": "module",
     "files": [
         "src/**/*"
     ],
     "scripts": {
-        "build": "jsdoc2md -f src/lib/* --separators > docs/api.md"
+        "doc": "jsdoc2md -f src/lib/* --separators > docs/api.md",
+        "bundle": "esbuild --bundle --minify --format=esm --outfile=something.js src/main.js",
+        "test": "vitest",
+        "coverage": "vitest --coverage",
+        "clean": "rm -rf something.js coverage"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/Aworldc/Something.git"
     },
     "devDependencies": {
-        "jsdoc-to-markdown": "*"
-    },
-    "dependencies": {
-        "bezier": "^0.1.0",
+        "@vitest/coverage-istanbul": "3.0.9",
+        "@vitest/coverage-v8": "3.0.9",
+        "jsdoc-to-markdown": "9.1.1",
+        "jsdom": "26.0.0",
+        "vitest": "3.0.9"
     }
 }

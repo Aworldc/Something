@@ -1,4 +1,41 @@
-import { prepare } from 'bezier'
+// Taken from https://www.npmjs.com/package/bezier, simplified a bit.
+function prepare(pieces) {
+    var fn = ['var ut = 1 - t', '']
+
+    var n = pieces
+    while (n--) {
+        for (var j = 0; j < n; j += 1) {
+            if (n + 1 === pieces) {
+                fn.push(
+                    'var p' +
+                        j +
+                        ' = arr[' +
+                        j +
+                        '] * ut + arr[' +
+                        (j + 1) +
+                        '] * t'
+                )
+            } else if (n > 1) {
+                fn.push('p' + j + ' = p' + j + ' * ut + p' + (j + 1) + ' * t')
+            } else {
+                fn.push('return p' + j + ' * ut + p' + (j + 1) + ' * t')
+            }
+        }
+        if (n > 1) fn.push('')
+    }
+
+    fn = [
+        'return function bezier' + pieces + '(arr, t) {',
+        fn
+            .map(function (s) {
+                return '  ' + s
+            })
+            .join('\n'),
+        '}'
+    ].join('\n')
+
+    return Function(fn)()
+}
 
 /**
  * A bezier curve
