@@ -7,6 +7,8 @@
 ```bash
 # requires node.js and pnpm. if you don't use pnpm replace pnpm with npm
 $ pnpm install @aworldc/something
+# or clone the repo (probably best right now as the npm package is wildly out of date)
+$ git clone https://github.com/Aworldc/something
 ```
 
 ## Get some boilerplate running
