@@ -24,13 +24,12 @@ Follow the damn title. Here's some copy-paste if you want it:
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
     </head>
     <body>
         <div class="app"></div>
-        <script src="main.js"></script>
+        <script type="module" src="main.js"></script>
     </body>
 </html>
 ```
@@ -65,3 +64,4 @@ Yes, I know. You have to read the ~~freaking~~ friendly manual.<br>Wait, you
 wanted a link? Oh ok. [Here](api.md).
 
 Or continue with the tutorial, [over the page](/docs/using-reactivity.md).
+
