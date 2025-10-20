@@ -53,7 +53,7 @@ button increment the counter on click. Can you figure that out?
 ## Updating the button's state
 
 Changing a reactive is cool and all, but out of the box, changing a reactive
-only changes a reactive. Even you should know that.
+only changes that reactive. Even you should know that.
 
 We need to do something useful with the count. Currently the button says
 "Clicked 0 times" no matter what. We want it to actually reflect the value of
@@ -83,3 +83,4 @@ $('.app').insert(
         .handle('click', () => count.value++)
 )
 ```
+
