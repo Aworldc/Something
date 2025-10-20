@@ -31,8 +31,8 @@ export class Reactive {
     }
 
     update(updater) {
-        let new_value = updater(this.value)
-        this.value = new_value
+        updater(this)
+        this.#listeners.forEach(listener => listener(this.value, old_value))
     }
 
     as(formatter) {

@@ -38,9 +38,11 @@ import { $, _, Variable } from '@aworldc/something'
 
 let count = Variable(0)
 
-$('.app')
-    .insert(_('button').text('Clicked 0 times'))
-    .handle('click', () => alert('Clicked'))
+$('.app').insert(
+    _('button')
+        .text('Clicked 0 times')
+        .handle('click', () => alert('Clicked'))
+)
 ```
 
 ## Updating a Reactive
@@ -75,11 +77,9 @@ import { $, _, Variable } from '@aworldc/something'
 
 let count = Variable(0)
 
-$('.app')
-    .insert(
-        _('button').text(
-            count.as(current_count => `Clicked ${current_count} times`)
-        )
-    )
-    .handle('click', () => count.value++)
+$('.app').insert(
+    _('button')
+        .text(count.as(current_count => `Clicked ${current_count} times`))
+        .handle('click', () => count.value++)
+)
 ```

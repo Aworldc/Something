@@ -1,5 +1,18 @@
 import { expect, test, vi } from 'vitest'
-import { _, ElementBuilder, $, $all, $css, noop } from './main.js'
+import {
+    _,
+    ElementBuilder,
+    $,
+    $all,
+    $css,
+    noop,
+    get_random_item,
+    get_random_between,
+    get_random_string,
+    Tag,
+    Variable,
+    Reactive
+} from './main.js'
 
 let example_tagnames = ['h1', 'div', 'span', 'button', 'img']
 
@@ -205,4 +218,93 @@ test("Huge flamin' class test", () => {
 
 test('ElementBuilder.id() works', () => {
     expect(_().id('some-id')._domEl.id).toEqual('some-id')
+})
+
+test('get_random_item() works', () => {
+    let array = ['apple', 'orange', 'banana', 'blueberry', 'raspberry']
+
+    Array(1000)
+        .fill(0)
+        .forEach(() =>
+            expect(get_random_item(array)).toSatisfy(value =>
+                array.includes(value)
+            )
+        )
+})
+
+test('get_random_between() works', () => {
+    Array(20)
+        .fill(0)
+        .forEach(() => {
+            let min = get_random_between(5, 10)
+            let max = get_random_between(15, 20)
+
+            Array(100)
+                .fill(0)
+                .forEach(() => {
+                    let random = get_random_between(min, max)
+
+                    expect(random).toBeGreaterThanOrEqual(min)
+                    expect(random).toBeLessThanOrEqual(max)
+                })
+        })
+})
+
+test('get_random_string() works', () => {
+    Array(10)
+        .fill(0)
+        .forEach((v, i) =>
+            Array(10)
+                .fill(0)
+                .forEach(() => expect(get_random_string(i)).toHaveLength(i))
+        )
+})
+
+test('Tag() works', () => {
+    let withhello = Tag(thing => `Hello, ${thing}!`)
+
+    expect(withhello`world`).toEqual('Hello, world!')
+})
+
+test('Varible() works', () => {
+    let num = 69
+    let my_var = Variable(num)
+
+    expect(Variable(my_var)).toBe(my_var)
+    expect(Variable(num)).toBeInstanceOf(Reactive)
+    expect(Variable(num).value).toEqual(num)
+})
+
+test('ElementBuilder.insert() reactivity works', () => {
+    let element = Variable(_('h1').text('Hi'))
+    let el = _().insert(element)
+
+    expect(el.to_dom().innerHTML).toEqual('<h1>Hi</h1>')
+
+    element.value = _('h2').text('Bye')
+
+    expect(el.to_dom().innerHTML).toEqual('<h2>Bye</h2>')
+})
+
+test('ElementBuilder.get_prop() and set_prop() works', () => {
+    let element = _('h1')
+        .text('Hi')
+        .id('weeee')
+        .set_prop('abc', 'value')
+        .set_prop('class', 'some-class')
+
+    expect(element.get_prop('id')).toEqual('weeee')
+    expect(element.get_prop('abc')).toEqual('value')
+    expect(element.classes()).toEqual(['some-class'])
+})
+
+test('Reactive.as() works', () => {
+    let my_var = Variable(69)
+    let weewoo = my_var.as(num => `The number is ${num}`)
+
+    expect(weewoo.value).toEqual('The number is 69')
+
+    my_var.value++
+
+    expect(weewoo.value).toEqual('The number is 70')
 })

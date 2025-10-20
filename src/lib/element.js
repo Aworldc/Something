@@ -127,7 +127,7 @@ export class ElementBuilder {
         })
 
         this._domEl.addEventListener(event, () => {
-            variable = this._domEl.getAttribute(property)
+            variable.value = this._domEl.getAttribute(property)
         })
 
         return this
@@ -234,19 +234,34 @@ export class ElementBuilder {
 
     /**
      * Loops over an array and adds children to this element.
-     * @param {Array<*>} list The array to iterate over.
+     * @param {Array<*> | Reactive} list The array to iterate over.
      * @param {*} itemcallback A callback to call for each item, which returns an elementBuilder to be inserted.
      * @param {*} blankcallback A callback to call in the case of the array having 0 items, which returns an elementBuilder to be inserted.
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
-    loop(list, itemcallback, blankcallback) {
-        if (list.length == 0) {
-            this.insert(blankcallback())
-        } else {
-            list.forEach((item, index) => {
-                this.insert(itemcallback(item, index))
-            })
-        }
+    loop(list, itemcallback, blankcallback, some_wrapper = false) {
+        let items_container = new ElementBuilder().style('display', 'contents')
+
+        subscribe(list, list => {
+            items_container.clear()
+            if (list.length == 0) {
+                items_container.insert(blankcallback())
+            } else {
+                if (some_wrapper) {
+                    let sw = some_wrapper()
+                    list.forEach((item, index) => {
+                        sw.insert(itemcallback(item, index))
+                    })
+                    items_container.insert(sw)
+                } else {
+                    list.forEach((item, index) => {
+                        items_container.insert(itemcallback(item, index))
+                    })
+                }
+            }
+        })
+
+        this.insert(items_container)
 
         return this
     }

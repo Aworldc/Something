@@ -12,7 +12,8 @@
         "bundle": "esbuild --bundle --minify --format=esm --outfile=something.js src/main.js",
         "test": "vitest",
         "coverage": "vitest --coverage",
-        "clean": "rm -rf something.js coverage"
+        "clean": "rm -rf something.js coverage types",
+        "type": "tsc"
     },
     "repository": {
         "type": "git",
@@ -23,6 +24,7 @@
         "@vitest/coverage-v8": "3.0.9",
         "jsdoc-to-markdown": "9.1.1",
         "jsdom": "26.0.0",
-        "vitest": "3.0.9"
+        "vitest": "3.0.9",
+        "typescript": "*"
     }
 }
