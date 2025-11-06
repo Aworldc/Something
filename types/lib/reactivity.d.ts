@@ -1,9 +1,11 @@
-export class Reactive {
-    constructor(default_value: any, formatter?: () => void)
-    set value(new_value: any)
-    get value(): any
-    subscribe(handler: any): void
-    update(updater: any): void
-    as(formatter: any): Reactive
-    #private
+export type ReactiveFormatter<T> = (current_value: T) => any
+export type ReactiveSubscription<T> = (old_value: T, new_value: T) => void
+
+export class Reactive<T> {
+    constructor(default_value: T, formatter?: ReactiveFormatter<T>)
+    set value(new_value: T)
+    get value(): T
+    subscribe(handler: ReactiveSubscription<T>): void
+    update(updater: (this: this) => void): void
+    as<O>(formatter: ReactiveFormatter<T>): Reactive<O>
 }

@@ -1,6 +1,6 @@
 # Using reactivity
 
-<kbd><a href="/docs/index.md">Home</a></kbd> / <kbd>Using
+<kbd><a href="/docs/readme.md">Home</a></kbd> / <kbd>Using
 Reactivity</kbd><br><br>
 
 Starting from where we left off, in [getting started](/docs/get-started.md),
@@ -83,4 +83,3 @@ $('.app').insert(
         .handle('click', () => count.value++)
 )
 ```
-

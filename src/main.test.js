@@ -1,4 +1,4 @@
-import { expect, test, vi } from 'vitest'
+import { assert, expect, test, vi } from 'vitest'
 import {
     _,
     ElementBuilder,
@@ -307,4 +307,152 @@ test('Reactive.as() works', () => {
     my_var.value++
 
     expect(weewoo.value).toEqual('The number is 70')
+})
+
+test('Reactive.update() works', () => {
+    let my_var = Variable([])
+
+    expect(my_var.value).toHaveLength(0)
+
+    my_var.update(my_var => my_var.value.push('x'))
+
+    expect(my_var.value).toHaveLength(1)
+    expect(my_var.value[0]).toEqual('x')
+})
+
+test('ElementBuilder.handle() works', () => {
+    let fn = vi.fn()
+    let element = _('button').handle('click', fn)
+
+    expect(fn).toBeCalledTimes(0)
+
+    element.to_dom().click()
+
+    expect(fn).toBeCalledTimes(1)
+})
+
+test('ElementBuilder.handle() reactivity works', () => {
+    let fn_one = vi.fn()
+    let fn_two = vi.fn()
+
+    let fn = Variable(fn_one)
+
+    let element = _('button').handle('click', fn)
+
+    expect(fn_one).toBeCalledTimes(0)
+    expect(fn_two).toBeCalledTimes(0)
+    expect(fn.value).toBe(fn_one)
+
+    fn.value = fn_two
+
+    element.to_dom().click()
+
+    expect(fn_one).toBeCalledTimes(0)
+    expect(fn_two).toBeCalledTimes(1)
+    expect(fn.value).toBe(fn_two)
+})
+
+test('ElementBuilder.add_class() reactivity works', () => {
+    let class_name = Variable('someclass')
+
+    let el = _().add_class(class_name)
+
+    expect(el.classes()).toEqual(['someclass'])
+
+    class_name.value = 'someotherclass'
+
+    expect(el.classes()).toEqual(['someotherclass'])
+})
+
+test('ElementBuilder.loop() works', () => {
+    let array_one = Array(10)
+        .fill(0)
+        .map(() => get_random_between(1, 100))
+    let array_two = Array(15)
+        .fill(0)
+        .map(() => get_random_between(1, 100))
+    let array_four = []
+
+    let array = Variable(array_four)
+
+    let el = _().loop(
+        array,
+        item => _('span').text(item),
+        () => _('span').text('No items')
+    )
+    let el2 = _().loop(
+        array,
+        item => _('li').text(item),
+        () => _('p').text('No items'),
+        () => _('ul')
+    )
+
+    expect(el.to_dom().innerHTML).toEqual(
+        '<div style="display: contents;"><span>No items</span></div>'
+    )
+    expect(el2.to_dom().innerHTML).toEqual(
+        '<div style="display: contents;"><p>No items</p></div>'
+    )
+
+    array.value = array_one
+
+    expect(el.to_dom().innerHTML).toEqual(
+        `<div style="display: contents;">${array_one
+            .map(item => `<span>${item}</span>`)
+            .join('')}</div>`
+    )
+    expect(el2.to_dom().innerHTML).toEqual(
+        `<div style="display: contents;"><ul>${array_one
+            .map(item => `<li>${item}</li>`)
+            .join('')}</ul></div>`
+    )
+
+    array.value = array_two
+
+    expect(el.to_dom().innerHTML).toEqual(
+        `<div style="display: contents;">${array_two
+            .map(item => `<span>${item}</span>`)
+            .join('')}</div>`
+    )
+    expect(el2.to_dom().innerHTML).toEqual(
+        `<div style="display: contents;"><ul>${array_two
+            .map(item => `<li>${item}</li>`)
+            .join('')}</ul></div>`
+    )
+
+    array.value = array_four
+
+    expect(el.to_dom().innerHTML).toEqual(
+        '<div style="display: contents;"><span>No items</span></div>'
+    )
+    expect(el2.to_dom().innerHTML).toEqual(
+        '<div style="display: contents;"><p>No items</p></div>'
+    )
+})
+
+test('ElementBuilder.sub() works', () => {
+    let fn = vi.fn()
+    let x = Variable('x')
+
+    let el = _().sub(x, fn)
+
+    expect(fn).toBeCalledTimes(1)
+    expect(fn).toBeCalledWith('x', 'x', el)
+
+    x.value = 69
+
+    expect(fn).toBeCalledTimes(2)
+    expect(fn).toBeCalledWith(69, 'x', el)
+})
+
+test('ElementBuilder.bind_prop() works', () => {
+    let x = Variable('Some data')
+    let el = _().bind_prop('value', x, 'input')
+
+    expect(el.get_prop('value')).toEqual('Some data')
+
+    el.set_prop('value', 'meep')
+    el.to_dom().dispatchEvent(new Event('input'))
+
+    expect(x.value).toEqual('meep')
 })

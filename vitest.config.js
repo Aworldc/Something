@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config'
 
-// Number of bugs caught through tests so far: 2
+// Number of bugs caught through tests so far: 3
 
 export default defineConfig({
     test: {

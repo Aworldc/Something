@@ -5,15 +5,14 @@
     "main": "src/main.js",
     "type": "module",
     "files": [
-        "src/**/*"
+        "src/**/*",
+        "types/**/*",
+        "package.json"
     ],
     "scripts": {
-        "doc": "jsdoc2md -f src/lib/* --separators > docs/api.md",
-        "bundle": "esbuild --bundle --minify --format=esm --outfile=something.js src/main.js",
         "test": "vitest",
         "coverage": "vitest --coverage",
-        "clean": "rm -rf something.js coverage types",
-        "type": "tsc"
+        "typecheck": "tsc"
     },
     "repository": {
         "type": "git",
@@ -22,9 +21,19 @@
     "devDependencies": {
         "@vitest/coverage-istanbul": "3.0.9",
         "@vitest/coverage-v8": "3.0.9",
-        "jsdoc-to-markdown": "9.1.1",
         "jsdom": "26.0.0",
         "vitest": "3.0.9",
-        "typescript": "*"
+        "typescript": "^5.8.3"
+    },
+    "prettier": {
+        "experimentalTernaries": false,
+        "experimentalOperatorPosition": "start",
+        "tabWidth": 4,
+        "semi": false,
+        "singleQuote": true,
+        "trailingComma": "none",
+        "objectWrap": "collapse",
+        "arrowParens": "avoid",
+        "proseWrap": "always"
     }
 }
