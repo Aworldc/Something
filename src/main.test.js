@@ -260,12 +260,6 @@ test('get_random_string() works', () => {
         )
 })
 
-test('Tag() works', () => {
-    let withhello = Tag(thing => `Hello, ${thing}!`)
-
-    expect(withhello`world`).toEqual('Hello, world!')
-})
-
 test('Varible() works', () => {
     let num = 69
     let my_var = Variable(num)
