@@ -1,65 +1,72 @@
 import { Reactive } from './reactivity.js'
+import { MaybeReactive } from './types.js'
 
 /**
  * A chainable builder class for DOM elements.
  */
 export class ElementBuilder {
     /**
-     * @hideconstructor
-     * @see {@link _} for the function to create an instance of this class.
-     * @param {string} type The type of DOM element to create. div by default.
-     */
-    constructor(type?: string)
-    _domEl: HTMLElement
-    /**
      * Sets the text content of this element.
-     * @param {string | Reactive} content The content to be set.
+     * @param content The content to be set.
      * @returns The same elementBuilder it was called on.
      */
-    text(content: string | Reactive): this
+    text(content: MaybeReactive<string>): this
+
     /**
      * Inserts another elementBuilder as a child of this element.
-     * @param {ElementBuilder| Reactive} element The elementBuilder to insert.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param element The elementBuilder to insert.
+     * @returns The same elementBuilder it was called on.
      */
-    insert(element: ElementBuilder | Reactive): ElementBuilder
+    insert(element: MaybeReactive<ElementBuilder>): this
+
     /**
      * Adds an event listener to this element.
-     * @param {string} type The event to listen for.
-     * @param {function | Reactive} handler The function to handle the event.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param type The event to listen for.
+     * @param handler The function to handle the event.
+     * @returns The same elementBuilder it was called on.
      */
-    handle(type: string, handler: Function | Reactive): ElementBuilder
+    handle(
+        type: string,
+        handler: MaybeReactive<(type: string, self: this, event) => void>
+    ): this
+
     /**
      * Sets a css style property on this element.
-     * @param {string} property The css property to set.
-     * @param {*} value The value to set it to.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param property The css property to set.
+     * @param value The value to set it to.
+     * @returns The same elementBuilder it was called on.
      */
-    style(property: string, value: any): ElementBuilder
+    style(property: string, value: any): this
     set_cssvar(property: any, value: any): this
     get_cssvar(property: any): string
+
     /**
      * Sets a html attribute on this element.
-     * @param {string} property The property to set.
-     * @param {* | Reactive} value The value to set it to.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param property The property to set.
+     * @param value The value to set it to.
+     * @returns The same elementBuilder it was called on.
      */
-    set_prop(property: string, value: any | Reactive): ElementBuilder
+    set_prop(property: string, value: any | Reactive<any>): this
+
     /**
      * Gets the value of a html attribute on this element.
-     * @param {*} property The property of who's value to get.
+     * @param property The property of who's value to get.
      * @returns The value of the specified property.
      */
     get_prop(property: any): string
     bind_prop(property: any, variable: any, event: any): this
+
     /**
-     * Subscribe to an arbitrary somethingjs reactive value but get this element as an argument to the callback as well.
-     * @param {*} variable The reactive value to subscribe to.
-     * @param {*} callback The callback to subscribe with.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * Subscribe to an arbitrary reactive value but get this element as an argument to the callback as well.
+     * @param variable The reactive value to subscribe to.
+     * @param callback The callback to subscribe with.
+     * @returns The same elementBuilder it was called on.
      */
-    sub(variable: any, callback: any): ElementBuilder
+    sub<T>(
+        variable: Reactive<T>,
+        callback: (new_value: T, old_value: T, self: this) => void
+    ): this
+
     /**
      * Sets the id of this element.
      * @param {string} id The id to set on the element.
@@ -139,6 +146,7 @@ export class ElementBuilder {
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
     from_dom(element: any): ElementBuilder
+
     /**
      * Gets the underlying DOM element of this elementBuilder.
      * @returns The underlying DOM element of this elementBuilder.
