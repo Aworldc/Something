@@ -1,3 +1,5 @@
+/// <reference path="../../types/lib/reactivity.d.ts" />
+
 import { noop } from './util.js'
 
 export class Reactive {

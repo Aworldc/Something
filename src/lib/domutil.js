@@ -1,3 +1,5 @@
+/// <reference path="../../types/lib/domutil.d.ts" />
+
 import { ElementBuilder } from './element.js'
 
 function $(selector) {

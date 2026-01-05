@@ -1,3 +1,5 @@
+/// <reference path="../../types/lib/util.d.ts" />
+
 import { Reactive } from './reactivity.js'
 
 export function get_random_item(array) {

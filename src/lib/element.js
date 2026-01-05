@@ -1,3 +1,5 @@
+/// <reference path="../../types/lib/element.d.ts" />
+
 import { get_random_string, is_reactive, subscribe, Variable } from './util.js'
 import { Reactive } from './reactivity.js'
 

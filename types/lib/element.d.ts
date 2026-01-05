@@ -5,6 +5,9 @@ import { MaybeReactive } from './types.js'
  * A chainable builder class for DOM elements.
  */
 export class ElementBuilder {
+    constructor()
+    constructor(type: string)
+
     /**
      * Sets the text content of this element.
      * @param content The content to be set.
@@ -78,7 +81,7 @@ export class ElementBuilder {
      * @param {string | Reactive} name The classname to add.
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
-    add_class(name: string | Reactive): ElementBuilder
+    add_class(name: MaybeReactive<string>): ElementBuilder
     /**
      * Removes a class from this element.
      * @param {string} name The name of the class to remove.
@@ -119,7 +122,7 @@ export class ElementBuilder {
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
     loop(
-        list: Array<any> | Reactive,
+        list: MaybeReactive<Array<any>>,
         itemcallback: any,
         blankcallback: any,
         some_wrapper?: () => ElementBuilder | false
