@@ -122,7 +122,7 @@ export class ElementBuilder {
         list: Array<any> | Reactive,
         itemcallback: any,
         blankcallback: any,
-        some_wrapper?: boolean
+        some_wrapper?: () => ElementBuilder | false
     ): ElementBuilder
     /**
      * Checks whether this element has a class.

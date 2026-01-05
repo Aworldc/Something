@@ -1,8 +1,5 @@
 import { $, _, Variable } from '../src/main.js'
 
-// Whole thing doesn't bloody work
-// TODO Debug this trash
-
 let todos = Variable([])
 let input_value = Variable('')
 
@@ -38,7 +35,8 @@ $('.app')
                         .handle('click', () =>
                             todos.update(
                                 todos =>
-                                    (todos[index].done = !todos[index].done)
+                                    (todos.value[index].done =
+                                        !todos.value[index].done)
                             )
                         )
                 )

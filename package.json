@@ -1,5 +1,5 @@
 {
-    "name": "@aworldc/something",
+    "name": "@something/core",
     "description": "A lightweight, esm-first reactive frontend library.",
     "license": "MIT",
     "version": "2.0.0-alpha1",

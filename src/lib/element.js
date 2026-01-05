@@ -86,7 +86,7 @@ export class ElementBuilder {
         })
 
         this._domEl.addEventListener(event, () => {
-            variable.value = this._domEl.getAttribute(property)
+            variable.value = this._domEl[property]
         })
 
         return this
