@@ -58,7 +58,7 @@ export let Variable = <T>(initial_value: T): Reactive<T> =>
 export let subscribe = <T>(
     maybe_reactive: MaybeReactive<T>,
     handler: ReactiveSubscription<T>
-): any =>
+): void =>
     maybe_reactive instanceof Reactive
         ? maybe_reactive.subscribe(handler)
         : handler(maybe_reactive, maybe_reactive)

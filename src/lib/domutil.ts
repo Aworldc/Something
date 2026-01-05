@@ -18,6 +18,7 @@ export function $all(selector: string): Array<ElementBuilder> {
     let els = []
 
     document.querySelectorAll(selector).forEach(el => {
+        // @ts-ignore because it works fine even though an element isn't a htmlelement
         els.push(new ElementBuilder().from_dom(el))
     })
 
@@ -35,7 +36,7 @@ export function $css(css: string): void {
 
 /**
  * Creates a new dom element.
- * @param type The type of element to create. Defualts to a div
+ * @param type The type of element to create. Defaults to a div
  * @returns An elementBuilder attached to a brand-new dom element of the specified type.
  */
 export function _(type?: string): ElementBuilder {

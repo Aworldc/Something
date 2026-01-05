@@ -1,4 +1,4 @@
-import { get_random_string, is_reactive, subscribe, Variable } from './util.js'
+import { is_reactive, subscribe } from './util.js'
 import { MaybeReactive, Reactive } from './reactivity.js'
 
 /**
@@ -80,7 +80,7 @@ export class ElementBuilder {
      * @param value The value to set it to.
      * @returns The same elementBuilder it was called on.
      */
-    style(property: string, value: any): this {
+    style(property: string, value: string): this {
         subscribe(value, value => {
             this._domEl.style[property] = value
         })
@@ -88,7 +88,7 @@ export class ElementBuilder {
         return this
     }
 
-    set_cssvar(property: any, value: any): this {
+    set_cssvar(property: string, value: string): this {
         subscribe(value, value => {
             this._domEl.style.setProperty(`--${property}`, value)
         })
@@ -96,7 +96,7 @@ export class ElementBuilder {
         return this
     }
 
-    get_cssvar(property: any): string {
+    get_cssvar(property: string): string {
         return this._domEl.style.getPropertyValue(`--${property}`)
     }
 
@@ -106,7 +106,7 @@ export class ElementBuilder {
      * @param value The value to set it to.
      * @returns The same elementBuilder it was called on.
      */
-    set_prop(property: string, value: any | Reactive<any>): this {
+    set_prop(property: string, value: MaybeReactive<string>): this {
         subscribe(value, value => {
             this._domEl.setAttribute(property, value)
         })
@@ -119,11 +119,22 @@ export class ElementBuilder {
      * @param property The property of who's value to get.
      * @returns The value of the specified property.
      */
-    get_prop(property: any): string {
+    get_prop(property: string): string {
         return this._domEl.getAttribute(property)
     }
 
-    bind_prop(property: any, variable: any, event: any): this {
+    /**
+     * Links up a reactive to the value of a property on this element.
+     * @param property The property to get and set the value of
+     * @param variable The reactive that should be linked to the property
+     * @param event An event that will be fired when the property is changed
+     * @returns The same elementBuilder it was called on.
+     */
+    bind_prop(
+        property: string,
+        variable: Reactive<string>,
+        event: string
+    ): this {
         subscribe(variable, variable => {
             this._domEl.setAttribute(property, variable)
         })
@@ -153,8 +164,8 @@ export class ElementBuilder {
 
     /**
      * Sets the id of this element.
-     * @param {string} id The id to set on the element.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param id The id to set on the element.
+     * @returns The same elementBuilder it was called on.
      */
     id(id: string): ElementBuilder {
         this._domEl.setAttribute('id', id)
@@ -163,11 +174,11 @@ export class ElementBuilder {
 
     /**
      * Adds a class to this element.
-     * @param {string | Reactive} name The classname to add.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param name The classname to add.
+     * @returns The same elementBuilder it was called on.
      */
     add_class(name: MaybeReactive<string>): ElementBuilder {
-        let temp
+        let temp: string
 
         subscribe(name, value => {
             if (temp) {
@@ -183,8 +194,8 @@ export class ElementBuilder {
 
     /**
      * Removes a class from this element.
-     * @param {string} name The name of the class to remove.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param name The name of the class to remove.
+     * @returns The same elementBuilder it was called on.
      */
     remove_class(name: string): ElementBuilder {
         this._domEl.classList.remove(name)
@@ -193,8 +204,8 @@ export class ElementBuilder {
 
     /**
      * Replaces a class on this element.
-     * @param {string} oldClass The class to be replaced.
-     * @param {string} newClass The class to replace with.
+     * @param oldClass The class to be replaced.
+     * @param newClass The class to replace with.
      * @returns {ElementBuilder} The same elementBuilder it was called on.
      */
     replace_class(oldClass: string, newClass: string): ElementBuilder {
@@ -204,8 +215,8 @@ export class ElementBuilder {
 
     /**
      * Toggles a class on this element.
-     * @param {string} name The class to be toggled
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param name The class to be toggled
+     * @returns The same elementBuilder it was called on.
      */
     toggle_class(name: string): ElementBuilder {
         this._domEl.classList.toggle(name)
@@ -214,12 +225,16 @@ export class ElementBuilder {
 
     /**
      * Runs different code based on whether a class exists on this element.
-     * @param {string} name The class to check.
-     * @param {*} yescb Code to run if the class is present.
-     * @param {*} nocb Code to run if the class is not present.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param name The class to check.
+     * @param yescb Code to run if the class is present.
+     * @param nocb Code to run if the class is not present.
+     * @returns The same elementBuilder it was called on.
      */
-    if_class(name: string, yescb: any, nocb: any): ElementBuilder {
+    if_class(
+        name: string,
+        yescb: () => void,
+        nocb: () => void
+    ): ElementBuilder {
         if (this._domEl.classList.contains(name)) {
             yescb()
         } else {
@@ -230,7 +245,7 @@ export class ElementBuilder {
 
     /**
      * Completely clears the contents of this element.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @returns The same elementBuilder it was called on.
      */
     clear(): ElementBuilder {
         this._domEl.innerHTML = ''
@@ -239,15 +254,15 @@ export class ElementBuilder {
 
     /**
      * Loops over an array and adds children to this element.
-     * @param {Array<*> | Reactive} list The array to iterate over.
-     * @param {*} itemcallback A callback to call for each item, which returns an elementBuilder to be inserted.
-     * @param {*} blankcallback A callback to call in the case of the array having 0 items, which returns an elementBuilder to be inserted.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param list The array to iterate over.
+     * @param itemcallback A callback to call for each item, which returns an elementBuilder to be inserted.
+     * @param blankcallback A callback to call in the case of the array having 0 items, which returns an elementBuilder to be inserted.
+     * @returns The same elementBuilder it was called on.
      */
-    loop(
-        list: MaybeReactive<Array<any>>,
-        itemcallback: any,
-        blankcallback: any,
+    loop<T>(
+        list: MaybeReactive<Array<T>>,
+        itemcallback: (item: T, index: number) => ElementBuilder,
+        blankcallback: () => ElementBuilder,
         some_wrapper?: (() => ElementBuilder) | false
     ): ElementBuilder {
         let items_container = new ElementBuilder().style('display', 'contents')
@@ -280,8 +295,8 @@ export class ElementBuilder {
 
     /**
      * Checks whether this element has a class.
-     * @param {string} name The class to check for the presence of.
-     * @returns {boolean} Whether this element has that class
+     * @param name The class to check for the presence of.
+     * @returns Whether this element has that class
      */
     has_class(name: string): boolean {
         return this._domEl.classList.contains(name)
@@ -289,7 +304,7 @@ export class ElementBuilder {
 
     /**
      * Gets the list of all classes on this element.
-     * @returns {Array} All the classes on this element.
+     * @returns All the classes on this element.
      */
     classes(): Array<string> {
         return Array.from(this._domEl.classList)
@@ -297,7 +312,7 @@ export class ElementBuilder {
 
     /**
      * Gets a copy of this element.
-     * @returns {ElementBuilder} A copy of this element
+     * @returns A copy of this element
      */
     get(): ElementBuilder {
         return this
@@ -305,10 +320,10 @@ export class ElementBuilder {
 
     /**
      * Attaches this elementBuilder to another dom element.
-     * @param {*} element The DOM element to attach to.
-     * @returns {ElementBuilder} The same elementBuilder it was called on.
+     * @param element The DOM element to attach to.
+     * @returns The same elementBuilder it was called on.
      */
-    from_dom(element: any): ElementBuilder {
+    from_dom(element: HTMLElement): ElementBuilder {
         this._domEl = element
         return this
     }
@@ -321,7 +336,7 @@ export class ElementBuilder {
         return this._domEl
     }
 
-    if(condition: any, handler: any): this {
+    if(condition: boolean, handler: (self: ElementBuilder) => void): this {
         if (condition) {
             handler(this.get())
         }
@@ -329,7 +344,7 @@ export class ElementBuilder {
         return this
     }
 
-    process(handler: any): this {
+    process(handler: (self: ElementBuilder) => void): this {
         handler(this)
 
         return this
