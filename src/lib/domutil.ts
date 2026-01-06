@@ -6,7 +6,7 @@ import { ElementBuilder } from './element.js'
  * @returns An elementBuilder attached to the dom element associated with the provided selector.
  */
 export function $(selector: string): ElementBuilder {
-    return new ElementBuilder().from_dom(document.querySelector(selector))
+    return _().from_dom(document.querySelector(selector))
 }
 
 /**
@@ -15,14 +15,10 @@ export function $(selector: string): ElementBuilder {
  * @returns An array containing whose are attached to the DOM elements associated with the provided selector.
  */
 export function $all(selector: string): Array<ElementBuilder> {
-    let els = []
-
-    document.querySelectorAll(selector).forEach(el => {
+    return Array.from(document.querySelectorAll(selector)).map(el =>
         // @ts-ignore because it works fine even though an element isn't a htmlelement
-        els.push(new ElementBuilder().from_dom(el))
-    })
-
-    return els
+        new ElementBuilder().from_dom(el)
+    )
 }
 
 /**

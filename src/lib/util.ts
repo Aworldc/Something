@@ -26,18 +26,14 @@ export function get_random_between(min: number, max: number): number {
  * @returns A random alphanumeric string.
  */
 export function get_random_string(length: number): string {
-    let result = ''
-    const characters =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    const charactersLength = characters.length
-    let counter = 0
-    while (counter < length) {
-        result += characters.charAt(
-            Math.floor(Math.random() * charactersLength)
+    return Array(length)
+        .fill(0)
+        .map(() =>
+            get_random_item([
+                ...'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+            ])
         )
-        counter += 1
-    }
-    return result
+        .join('')
 }
 
 /**
@@ -46,9 +42,7 @@ export function get_random_string(length: number): string {
  * @returns A new reactive wrapping the provided value, or the provided value if it is a {@link Reactive}.
  */
 export let Variable = <T>(initial_value: T): Reactive<T> =>
-    initial_value instanceof Reactive
-        ? initial_value
-        : new Reactive(initial_value)
+    is_reactive(initial_value) ? initial_value : new Reactive(initial_value)
 
 /**
  * Subscribe to changes to a value that may or may not be a {@link Reactive}.
@@ -59,7 +53,7 @@ export let subscribe = <T>(
     maybe_reactive: MaybeReactive<T>,
     handler: ReactiveSubscription<T>
 ): void =>
-    maybe_reactive instanceof Reactive
+    is_reactive(maybe_reactive)
         ? maybe_reactive.subscribe(handler)
         : handler(maybe_reactive, maybe_reactive)
 
@@ -71,10 +65,3 @@ export let subscribe = <T>(
 export let is_reactive = <T>(
     maybe_reactive: MaybeReactive<T>
 ): maybe_reactive is Reactive<T> => maybe_reactive instanceof Reactive
-
-/**
- * Does absolutely nothing.
- *
- * Name short for "No operation".
- */
-export let noop = (): void => {}

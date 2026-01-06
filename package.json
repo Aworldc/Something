@@ -13,7 +13,8 @@
     "scripts": {
         "test": "vitest",
         "coverage": "vitest --coverage",
-        "typecheck": "tsc"
+        "typecheck": "tsc",
+        "bundle": "esbuild --bundle --minify --format=esm --outfile=something.js src/main.js"
     },
     "repository": {
         "type": "git",
@@ -24,7 +25,8 @@
         "@vitest/coverage-v8": "3.0.9",
         "jsdom": "26.0.0",
         "vitest": "3.0.9",
-        "typescript": "^5.8.3"
+        "typescript": "^5.8.3",
+        "esbuild": "^0.27.2"
     },
     "prettier": {
         "experimentalTernaries": false,

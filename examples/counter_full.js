@@ -4,7 +4,7 @@ let count = Variable(0)
 
 // $css is a depreciated way to style things, but I'm
 // using it here just so the examples are self contained.
-// Please use a seperate css file and/or tailwind.
+// Please use a separate css file and/or tailwind.
 $css(`
     .app {
         display: flex;

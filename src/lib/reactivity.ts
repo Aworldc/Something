@@ -25,11 +25,9 @@ export class Reactive<T> {
      * @returns the current value of this reactive, possibly processed through a formatter.
      */
     get value(): T {
-        if (this.#formatter != null) {
-            return this.#formatter(this.#value)
-        } else {
-            return this.#value
-        }
+        return this.#formatter != null
+            ? this.#formatter(this.#value)
+            : this.#value
     }
 
     /**
