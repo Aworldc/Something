@@ -19,7 +19,7 @@ jobs:
               with:
                   node-version: '20'
                   cache: 'pnpm'
-            - run: pnpm i
+            - run: pnpm i --frozen-lockfile
             - run: pnpm test & pnpm typecheck
             - if: github.event_name == 'push'
               run: pnpm bundle:js & pnpm bundle:dts & pnpm doc
