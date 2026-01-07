@@ -1,5 +1,4 @@
 node_modules
 build
-pnpm-lock.yaml
 index.html
 coverage
