@@ -1,6 +1,6 @@
 # Get started with something
 
-<kbd><a href="/docs/index.md">Home</a></kbd> / <kbd>Get Started</kbd><br><br>
+<kbd><a href="/docs/README.md">Home</a></kbd> / <kbd>Get Started</kbd><br><br>
 
 ## Install
 
@@ -10,6 +10,8 @@ $ pnpm install @aworldc/something
 # or clone the repo (probably best right now as the npm package is wildly out of date)
 $ git clone https://github.com/Aworldc/something
 ```
+
+Or, download a build from [here](../dist/)
 
 ## Get some boilerplate running
 
