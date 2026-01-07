@@ -13,6 +13,7 @@
         "test": "vitest",
         "coverage": "vitest --coverage",
         "typecheck": "tsc",
+        "doc": "tsdoc-markdown --src=src/lib/* --dest=docs/api.md --noemoji --types",
         "bundle:js": "esbuild --bundle --minify --format=esm --outfile=dist/something.js src/main.js",
         "bundle:dts": "dts-bundle-generator -o dist/something.d.ts src/main.js"
     },
@@ -27,7 +28,8 @@
         "vitest": "3.0.9",
         "typescript": "^5.8.3",
         "esbuild": "^0.27.2",
-        "dts-bundle-generator": "^9.5.1"
+        "dts-bundle-generator": "^9.5.1",
+        "tsdoc-markdown": "^1.4.1"
     },
     "prettier": {
         "experimentalTernaries": false,
