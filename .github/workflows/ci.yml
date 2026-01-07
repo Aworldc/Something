@@ -22,3 +22,9 @@ jobs:
             - run: pnpm i
             - run: pnpm test
             - run: pnpm typecheck
+            - if: github.event_name == 'push'
+              run: pnpm bundle:js && pnpm bundle:dts
+            - if: github.event_name == 'push'
+              uses: stefanzweifel/git-auto-commit-action@v7
+              with:
+                  commit_message: Automated bundles + docs update
