@@ -1,5 +1,6 @@
 import { is_reactive, subscribe } from './util.js'
 import { MaybeReactive, Reactive } from './reactivity.js'
+import { _ } from './domutil.js'
 
 /**
  * A chainable builder class for DOM elements.
@@ -80,7 +81,7 @@ export class ElementBuilder {
      * @param value The value to set it to.
      * @returns The same elementBuilder it was called on.
      */
-    style(property: string, value: string): this {
+    style(property: string, value: MaybeReactive<string>): this {
         subscribe(value, value => {
             this._domEl.style[property] = value
         })
@@ -108,7 +109,7 @@ export class ElementBuilder {
      */
     set_prop(property: string, value: MaybeReactive<string>): this {
         subscribe(value, value => {
-            this._domEl.setAttribute(property, value)
+            this._domEl[property] = value
         })
 
         return this
@@ -120,7 +121,7 @@ export class ElementBuilder {
      * @returns The value of the specified property.
      */
     get_prop(property: string): string {
-        return this._domEl.getAttribute(property)
+        return this._domEl[property]
     }
 
     /**
@@ -136,7 +137,7 @@ export class ElementBuilder {
         event: string
     ): this {
         subscribe(variable, variable => {
-            this._domEl.setAttribute(property, variable)
+            this.set_prop(property, variable)
         })
 
         this._domEl.addEventListener(event, () => {
@@ -265,7 +266,7 @@ export class ElementBuilder {
         blankcallback: () => ElementBuilder,
         some_wrapper?: (() => ElementBuilder) | false
     ): ElementBuilder {
-        let items_container = new ElementBuilder().style('display', 'contents')
+        let items_container = _().style('display', 'contents')
 
         subscribe(list, list => {
             items_container.clear()

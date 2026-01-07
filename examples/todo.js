@@ -40,7 +40,14 @@ $('.app')
                             )
                         )
                 )
-                .insert(_('span').text(item.text)),
+                .insert(
+                    _('span')
+                        .style(
+                            'text-decoration',
+                            item.done ? 'line-through' : 'none'
+                        )
+                        .text(item.text)
+                ),
         () => _('span').text('No items'),
         () => _('ul')
     )

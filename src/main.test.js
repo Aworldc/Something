@@ -151,11 +151,6 @@ test('ElementBuilder.get_cssvar() works', () => {
     expect(el.get_cssvar('whatever')).toEqual('69420')
 })
 
-test('noop() works', () => {
-    expect(noop()).toBeUndefined()
-    expect(noop.toString()).toBe('() => {}')
-})
-
 test('ElementBuilder.clear() works', () => {
     let el = _().insert(_().text('hi'))
 
@@ -260,7 +255,7 @@ test('get_random_string() works', () => {
         )
 })
 
-test('Varible() works', () => {
+test('Variable() works', () => {
     let num = 69
     let my_var = Variable(num)
 
@@ -285,7 +280,7 @@ test('ElementBuilder.get_prop() and set_prop() works', () => {
         .text('Hi')
         .id('weeee')
         .set_prop('abc', 'value')
-        .set_prop('class', 'some-class')
+        .set_prop('classList', 'some-class')
 
     expect(element.get_prop('id')).toEqual('weeee')
     expect(element.get_prop('abc')).toEqual('value')

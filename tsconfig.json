@@ -2,6 +2,8 @@
     "files": ["src/main.js"],
     "compilerOptions": {
         "checkJs": true,
+        "declaration": true,
+        "emitDeclarationOnly": true,
         "noEmit": true,
         "lib": ["ES2015", "DOM"],
         "target": "es2015"
