@@ -5,13 +5,13 @@
 ## Install
 
 ```bash
-# requires node.js and pnpm. if you don't use pnpm replace pnpm with npm
-$ pnpm install @aworldc/something
-# or clone the repo (probably best right now as the npm package is wildly out of date)
-$ git clone https://github.com/Aworldc/something
+# Requires node.js and pnpm.
+$ pnpm install jsr:@something/core
+# Using npm. Just requires node.js.
+$ npx jsr add @something/core
 ```
 
-Or, download a build from [here](../dist/)
+Or, download a build from [releases](../../../releases).
 
 ## Get some boilerplate running
 
@@ -66,3 +66,4 @@ Yes, I know. You have to read the ~~freaking~~ friendly manual.<br>Wait, you
 wanted a link? Oh ok. [Here](api.md).
 
 Or continue with the tutorial, [over the page](/docs/using-reactivity.md).
+
