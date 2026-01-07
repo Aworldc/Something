@@ -13,7 +13,7 @@
         "test": "vitest",
         "coverage": "vitest --coverage",
         "typecheck": "tsc",
-        "doc": "tsdoc-markdown --src=src/lib/* --dest=docs/api.md --noemoji --types",
+        "doc": "tsdoc --src=src/lib/* --dest=docs/api.md --noemoji --types",
         "bundle:js": "esbuild --bundle --minify --format=esm --outfile=dist/something.js src/main.js",
         "bundle:dts": "dts-bundle-generator -o dist/something.d.ts src/main.js"
     },
