@@ -2,3 +2,5 @@ node_modules
 build
 index.html
 coverage
+jsr.json
+src/main.d.ts

@@ -3,11 +3,14 @@
     "description": "A lightweight, esm-first reactive frontend library.",
     "license": "MIT",
     "version": "2.0.0-beta1",
-    "main": "src/main.js",
+    "main": "./src/main.js",
     "type": "module",
     "files": [
-        "src/**/*",
-        "package.json"
+        "src/main.js",
+        "src/lib/**/*",
+        "package.json",
+        "README.md",
+        "LICENSE"
     ],
     "scripts": {
         "test": "vitest",
@@ -15,7 +18,9 @@
         "typecheck": "tsc",
         "doc": "tsdoc --src=src/lib/* --dest=docs/api.md --noemoji --types",
         "bundle:js": "esbuild --bundle --minify --format=esm --outfile=dist/something.js src/main.js",
-        "bundle:dts": "dts-bundle-generator -o dist/something.d.ts src/main.js"
+        "bundle:dts": "dts-bundle-generator -o dist/something.d.ts src/main.js",
+        "jsr:manifest": "nix-shell -p jq --run \"jq '{ name, license, version, exports: .main, include: .files }' package.json > jsr.json\"",
+        "jsr:publish": "nix-shell -p deno --run \"deno publish --unstable-sloppy-imports --no-check\""
     },
     "repository": {
         "type": "git",
