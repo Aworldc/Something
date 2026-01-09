@@ -89,7 +89,13 @@ export class ElementBuilder {
         return this
     }
 
-    set_cssvar(property: string, value: string): this {
+    /**
+     * Sets a css custom property on this element.
+     * @param property The name of the custom property, without the two leading hyphens.
+     * @param value The value to set it to.
+     * @returns The same elementBuilder it was called on.
+     */
+    set_cssvar(property: string, value: MaybeReactive<string>): this {
         subscribe(value, value => {
             this._domEl.style.setProperty(`--${property}`, value)
         })
@@ -97,6 +103,11 @@ export class ElementBuilder {
         return this
     }
 
+    /**
+     * Gets the value of a css custom property on this element.
+     * @param property The name of the custom property, without the two leading hyphens.
+     * @returns The value of the custom property.
+     */
     get_cssvar(property: string): string {
         return this._domEl.style.getPropertyValue(`--${property}`)
     }
@@ -337,6 +348,13 @@ export class ElementBuilder {
         return this._domEl
     }
 
+    /**
+     * Calls the handler function with this element if the provided condition is true.
+     * @param condition The condition to check for.
+     * @param handler The function to run if the condition is true.
+     * @returns The same elementBuilder it was called on.
+     * @deprecated for now because I'm not sure if it's necessary. Will either remove it or undeprecate it.
+     */
     if(condition: boolean, handler: (self: ElementBuilder) => void): this {
         if (condition) {
             handler(this.get())
@@ -345,6 +363,11 @@ export class ElementBuilder {
         return this
     }
 
+    /**
+     * Calls a function with this element as an argument.
+     * @param handler A function to do something with this element.
+     * @returns The same elementBuilder it was called on.
+     */
     process(handler: (self: ElementBuilder) => void): this {
         handler(this)
 

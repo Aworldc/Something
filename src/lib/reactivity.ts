@@ -1,4 +1,11 @@
+/**
+ * A function for transforming the value of a reactive.
+ */
 export type ReactiveFormatter<T, O> = (current_value: T) => O
+
+/**
+ * A function for listening for changes to a reactive.
+ */
 export type ReactiveSubscription<T> = (old_value: T, new_value: T) => void
 
 /**
