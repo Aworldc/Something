@@ -345,15 +345,38 @@ The same elementBuilder it was called on.
 
 #### set_cssvar
 
+Sets a css custom property on this element.
+
 | Method | Type |
 | ---------- | ---------- |
-| `set_cssvar` | `(property: string, value: string) => this` |
+| `set_cssvar` | `(property: string, value: MaybeReactive<string>) => this` |
+
+Parameters:
+
+* `property`: The name of the custom property, without the two leading hyphens.
+* `value`: The value to set it to.
+
+
+Returns:
+
+The same elementBuilder it was called on.
 
 #### get_cssvar
+
+Gets the value of a css custom property on this element.
 
 | Method | Type |
 | ---------- | ---------- |
 | `get_cssvar` | `(property: string) => string` |
+
+Parameters:
+
+* `property`: The name of the custom property, without the two leading hyphens.
+
+
+Returns:
+
+The value of the custom property.
 
 #### set_prop
 
@@ -635,15 +658,38 @@ The underlying DOM element of this elementBuilder.
 
 #### if
 
+Calls the handler function with this element if the provided condition is true.
+
 | Method | Type |
 | ---------- | ---------- |
 | `if` | `(condition: boolean, handler: (self: ElementBuilder) => void) => this` |
 
+Parameters:
+
+* `condition`: The condition to check for.
+* `handler`: The function to run if the condition is true.
+
+
+Returns:
+
+The same elementBuilder it was called on.
+
 #### process
+
+Calls a function with this element as an argument.
 
 | Method | Type |
 | ---------- | ---------- |
 | `process` | `(handler: (self: ElementBuilder) => void) => this` |
+
+Parameters:
+
+* `handler`: A function to do something with this element.
+
+
+Returns:
+
+The same elementBuilder it was called on.
 
 ### Properties
 
@@ -663,11 +709,15 @@ The underlying DOM element of this elementBuilder.
 
 ### ReactiveFormatter
 
+A function for transforming the value of a reactive.
+
 | Type | Type |
 | ---------- | ---------- |
 | `ReactiveFormatter` | `(current_value: T) => O` |
 
 ### ReactiveSubscription
+
+A function for listening for changes to a reactive.
 
 | Type | Type |
 | ---------- | ---------- |
